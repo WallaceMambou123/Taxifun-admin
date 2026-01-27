@@ -1,0 +1,508 @@
+/* Page principale */
+.pageContainer {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+   background: linear-gradient(135deg, #EC8C01 0%, #EC8C01 100%);
+  padding: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Carte d'inscription principale */
+.registerCard {
+  width: 100%;
+  max-width: 1100px;
+  min-height: 650px;
+  display: flex;
+  flex-direction: row;
+  background: #ffffff;
+  border-radius: 25px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  animation: fadeInUp 0.6s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* SECTION GAUCHE - FORMULAIRE */
+.formSection {
+  flex: 1.2;
+  padding: 50px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: white;
+  animation: formSlide 0.8s ease-out 0.2s both;
+  overflow-y: auto;
+}
+
+@keyframes formSlide {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.formContainer {
+  width: 100%;
+  max-width: 480px;
+}
+
+.registerTitle {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #2d3748;
+  margin: 0 0 8px 0;
+  text-align: center;
+}
+
+.subtitle {
+  font-size: 1rem;
+  color: #718096;
+  margin: 0 0 30px 0;
+  text-align: center;
+}
+
+/* Formulaire */
+.form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.formRow {
+  display: flex;
+  gap: 15px;
+  width: 100%;
+}
+
+.formRow .inputGroup {
+  flex: 1;
+}
+
+.inputGroup {
+  position: relative;
+  width: 100%;
+}
+
+.input {
+  width: 100%;
+  padding: 13px 45px 13px 16px;
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  color: #2d3748;
+  background: #f7fafc;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+
+.input:focus {
+  outline: none;
+  border-color: #EC8C01;
+  background: white;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.input::placeholder {
+  color: #a0aec0;
+}
+
+.inputIcon {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.1rem;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.registerBtn {
+  width: 100%;
+  padding: 14px;
+ background: linear-gradient(135deg, #EC8C01 0%, #EC8C01 100%);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+  margin-top: 10px;
+}
+
+.registerBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+.registerBtn:active {
+  transform: translateY(0);
+}
+
+/* Divider */
+.divider {
+  margin: 20px 0;
+  text-align: center;
+  position: relative;
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 35%;
+  height: 1px;
+  background: #e2e8f0;
+}
+
+.divider::before {
+  left: 0;
+}
+
+.divider::after {
+  right: 0;
+}
+
+.divider span {
+  font-size: 0.875rem;
+  color: #a0aec0;
+  background: white;
+  padding: 0 10px;
+}
+
+/* Boutons sociaux */
+.socialButtons {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.socialBtn {
+  width: 50px;
+  height: 50px;
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  background: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.socialBtn:hover {
+  border-color: #EC8C01;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.2);
+}
+
+.socialIcon {
+  width: 24px;
+  height: 24px;
+}
+
+/* Lien de connexion */
+.loginLink {
+  text-align: center;
+  font-size: 0.9rem;
+  color: #718096;
+}
+
+.loginLink .bouton{
+    border: none;
+    background-color: white;
+    color: #EC8C01;
+    cursor: pointer;
+}
+
+.loginLink a {
+  color: #EC8C01;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s ease;
+}
+
+.loginLink a:hover {
+  color: #EC8C01;
+  text-decoration: underline;
+}
+
+/* SECTION DROITE - IMAGE */
+.imageSection {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+   background: linear-gradient(135deg, #EC8C01 0%, #EC8C01 100%);
+}
+
+.carImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+   background: linear-gradient(
+  135deg,
+  rgba(236, 140, 1, 0.85) 0%,
+  rgba(255, 255, 255, 0.85) 100%
+);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  color: white;
+  animation: overlaySlide 0.8s ease-out;
+}
+
+@keyframes overlaySlide {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.welcomeTitle {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin: 0 0 15px 0;
+  text-align: center;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  animation: titleFade 0.8s ease-out 0.2s both;
+}
+
+@keyframes titleFade {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.welcomeSubtitle {
+  font-size: 1.05rem;
+  margin: 0 0 40px 0;
+  opacity: 0.95;
+  text-align: center;
+  line-height: 1.6;
+  animation: titleFade 0.8s ease-out 0.3s both;
+}
+
+/* Features */
+.features {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  width: 100%;
+  max-width: 320px;
+  animation: titleFade 0.8s ease-out 0.4s both;
+}
+
+.feature {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  background: rgba(255, 255, 255, 0.15);
+  padding: 15px 20px;
+  border-radius: 15px;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+.feature:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: translateX(10px);
+}
+
+.featureIcon {
+  font-size: 2rem;
+  flex-shrink: 0;
+}
+
+.feature p {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 900px) {
+  .registerCard {
+    flex-direction: column-reverse;
+    max-width: 550px;
+  }
+
+  .formSection {
+    flex: none;
+    padding: 40px 30px;
+  }
+
+  .imageSection {
+    min-height: 300px;
+    flex: none;
+  }
+
+  .overlay {
+    padding: 30px 20px;
+  }
+
+  .welcomeTitle {
+    font-size: 2rem;
+  }
+
+  .welcomeSubtitle {
+    font-size: 0.95rem;
+    margin-bottom: 30px;
+  }
+
+  .features {
+    gap: 20px;
+  }
+
+  .feature {
+    padding: 12px 18px;
+  }
+
+  .featureIcon {
+    font-size: 1.75rem;
+  }
+
+  .feature p {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .pageContainer {
+    padding: 10px;
+  }
+
+  .registerCard {
+    border-radius: 20px;
+    max-width: 100%;
+  }
+
+  .formSection {
+    padding: 35px 25px;
+  }
+
+  .registerTitle {
+    font-size: 1.85rem;
+  }
+
+  .subtitle {
+    font-size: 0.9rem;
+    margin-bottom: 25px;
+  }
+
+  .formRow {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .form {
+    gap: 14px;
+  }
+
+  .imageSection {
+    min-height: 250px;
+  }
+
+  .welcomeTitle {
+    font-size: 1.75rem;
+  }
+
+  .welcomeSubtitle {
+    font-size: 0.9rem;
+  }
+
+  .features {
+    gap: 15px;
+  }
+
+  .feature {
+    padding: 12px 15px;
+  }
+
+  .featureIcon {
+    font-size: 1.5rem;
+  }
+
+  .feature p {
+    font-size: 0.85rem;
+  }
+
+  .socialButtons {
+    gap: 12px;
+  }
+
+  .socialBtn {
+    width: 45px;
+    height: 45px;
+  }
+
+  .socialIcon {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+@media (max-width: 400px) {
+  .formSection {
+    padding: 30px 20px;
+  }
+
+  .registerTitle {
+    font-size: 1.6rem;
+  }
+
+  .input {
+    padding: 12px 40px 12px 14px;
+    font-size: 0.9rem;
+  }
+
+  .registerBtn {
+    padding: 13px;
+    font-size: 0.95rem;
+  }
+}
