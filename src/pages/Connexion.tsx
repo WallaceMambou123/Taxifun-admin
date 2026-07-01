@@ -50,21 +50,21 @@ const Connexion: React.FC = () => {
           <div className={styles.formContainer}>
             <h2 className={styles.loginTitle}>Connexion</h2>
             
-            <form className={styles.form} onSubmit={handleSubmit}   autoComplete="off">
+            <form className={styles.form} onSubmit={handleSubmit} autoComplete="off">
               <div className={styles.inputGroup}>
+                <span className={styles.inputIcon}><FontAwesomeIcon icon={faUser} /></span>
                 <input
                   type="text"
                   placeholder="Nom d'utilisateur"
                   className={styles.input}
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
-                
                   required
                 />
-                <span className={styles.inputIcon}><FontAwesomeIcon icon={faUser} /></span>
               </div>
 
               <div className={styles.inputGroup}>
+                <span className={styles.inputIcon}><FontAwesomeIcon icon={faLock} /></span>
                 <input
                   type="password"
                   placeholder="Mot de passe"
@@ -73,7 +73,6 @@ const Connexion: React.FC = () => {
                   onChange={(e) => setPassword(e.target.value)}
                   required
                 />
-                <span className={styles.inputIcon}><FontAwesomeIcon icon={faLock} /></span>
               </div>
 
               <a href="#" className={styles.forgotPassword}>
@@ -81,7 +80,16 @@ const Connexion: React.FC = () => {
               </a>
 
               <button type="submit" className={styles.loginBtn} disabled={loading}>
-                {loading ? "Connexion..." : "Se connecter"}
+                {loading ? (
+                  <span className={styles.spinnerContainer}>
+                    <svg className={styles.spinner} viewBox="0 0 50 50">
+                      <circle className={styles.path} cx="25" cy="25" r="20" fill="none" strokeWidth="5"></circle>
+                    </svg>
+                    Connexion...
+                  </span>
+                ) : (
+                  "Se connecter"
+                )}
               </button>
             </form>
 

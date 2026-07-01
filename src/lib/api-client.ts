@@ -1,7 +1,9 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:3000',
+  // baseURL: import.meta.env.VITE_API_URL || 'https://taxifun-api.onrender.com',
+  baseURL: 'https://taxifun-api.onrender.com',
+
 });
 
 api.interceptors.request.use((config) => {

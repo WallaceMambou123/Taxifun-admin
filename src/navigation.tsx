@@ -4,13 +4,10 @@ import {
   createRoute,
   Outlet,
   useRouter,
-  HeadContent,
-  Scripts,
   notFound,
 } from "@tanstack/react-router";
-import { useEffect, type ReactNode } from "react";
+import { useEffect } from "react";
 
-import appCss from "./styles.css?url";
 import { reportLovableError } from "./lib/lovable-error-reporting";
 
 // Import components
@@ -79,20 +76,6 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   );
 }
 
-function RootShell({ children }: { children: ReactNode }) {
-  return (
-    <html lang="fr" className="dark">
-      <head>
-        <HeadContent />
-      </head>
-      <body>
-        {children}
-        <Scripts />
-      </body>
-    </html>
-  );
-}
-
 function RootComponent() {
   const { queryClient } = rootRoute.useRouteContext();
 
@@ -105,25 +88,6 @@ function RootComponent() {
 
 // 1. Root Route
 export const rootRoute = createRootRouteWithContext<{ queryClient: QueryClient }>()({
-  head: () => ({
-    meta: [
-      { charSet: "utf-8" },
-      { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Taxifun Admin — Plateforme de gestion VTC" },
-      { name: "description", content: "Console d'administration premium pour la flotte Taxifun." },
-      { property: "og:title", content: "Taxifun Admin" },
-      { property: "og:description", content: "Console d'administration premium pour la flotte Taxifun." },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary" },
-    ],
-    links: [
-      { rel: "stylesheet", href: appCss },
-      { rel: "preconnect", href: "https://fonts.googleapis.com" },
-      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" },
-    ],
-  }),
-  shellComponent: RootShell,
   component: RootComponent,
   notFoundComponent: NotFoundComponent,
   errorComponent: ErrorComponent,

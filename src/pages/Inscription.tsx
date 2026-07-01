@@ -29,6 +29,7 @@ const Inscription: React.FC = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log("Tentative d'inscription...", formData);
+    navigate({ to: "/dashboard" });
   };
 
   return (
@@ -43,6 +44,7 @@ const Inscription: React.FC = () => {
             <form className={styles.form} onSubmit={handleSubmit}>
               <div className={styles.formRow}>
                 <div className={styles.inputGroup}>
+                  <span className={styles.inputIcon}><FontAwesomeIcon icon={faUser} /></span>
                   <input
                     type="text"
                     name="nom"
@@ -52,10 +54,10 @@ const Inscription: React.FC = () => {
                     onChange={handleChange}
                     required
                   />
-                  <span className={styles.inputIcon}><FontAwesomeIcon icon={faUser} /></span>
                 </div>
 
                 <div className={styles.inputGroup}>
+                  <span className={styles.inputIcon}><FontAwesomeIcon icon={faUser} /></span>
                   <input
                     type="text"
                     name="prenom"
@@ -65,11 +67,11 @@ const Inscription: React.FC = () => {
                     onChange={handleChange}
                     required
                   />
-                  <span className={styles.inputIcon}><FontAwesomeIcon icon={faUser} /></span>
                 </div>
               </div>
 
               <div className={styles.inputGroup}>
+                <span className={styles.inputIcon}><FontAwesomeIcon icon={faAddressCard} /></span>
                 <input
                   type="email"
                   name="email"
@@ -79,10 +81,10 @@ const Inscription: React.FC = () => {
                   onChange={handleChange}
                   required
                 />
-                <span className={styles.inputIcon}><FontAwesomeIcon icon={faAddressCard} /></span>
               </div>
 
               <div className={styles.inputGroup}>
+                <span className={styles.inputIcon}><FontAwesomeIcon icon={faPhone} /></span>
                 <input
                   type="tel"
                   name="telephone"
@@ -92,10 +94,10 @@ const Inscription: React.FC = () => {
                   onChange={handleChange}
                   required
                 />
-                <span className={styles.inputIcon}><FontAwesomeIcon icon={faPhone} /></span>
               </div>
 
               <div className={styles.inputGroup}>
+                <span className={styles.inputIcon}><FontAwesomeIcon icon={faLock} /></span>
                 <input
                   type="password"
                   name="password"
@@ -105,10 +107,10 @@ const Inscription: React.FC = () => {
                   onChange={handleChange}
                   required
                 />
-                <span className={styles.inputIcon}><FontAwesomeIcon icon={faLock} /></span>
               </div>
 
               <div className={styles.inputGroup}>
+                <span className={styles.inputIcon}><FontAwesomeIcon icon={faLock} /></span>
                 <input
                   type="password"
                   name="confirmPassword"
@@ -118,10 +120,9 @@ const Inscription: React.FC = () => {
                   onChange={handleChange}
                   required
                 />
-                <span className={styles.inputIcon}><FontAwesomeIcon icon={faLock} /></span>
               </div>
 
-              <button type="submit" className={styles.registerBtn} onClick={() => {navigate({ to: "/dashboard" })}}>
+              <button type="submit" className={styles.registerBtn}>
                 S'inscrire
               </button>
             </form>

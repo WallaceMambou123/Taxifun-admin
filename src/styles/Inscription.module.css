@@ -1,32 +1,35 @@
-/* Page principale */
 .pageContainer {
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-   background: linear-gradient(135deg, #EC8C01 0%, #EC8C01 100%);
+  background: radial-gradient(circle at 10% 20%, oklch(0.35 0.1 50 / 0.15) 0%, transparent 40%),
+              radial-gradient(circle at 90% 80%, oklch(0.8 0.15 80 / 0.05) 0%, transparent 50%),
+              oklch(0.12 0.02 265);
   padding: 20px;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Inter', system-ui, sans-serif;
+  width: 100%;
 }
 
-/* Carte d'inscription principale */
 .registerCard {
   width: 100%;
   max-width: 1100px;
   min-height: 650px;
   display: flex;
   flex-direction: row;
-  background: #ffffff;
-  border-radius: 25px;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  background: oklch(0.23 0.03 265 / 0.45);
+  backdrop-filter: blur(28px) saturate(180%);
+  border: 1px solid oklch(1 1 1 / 0.1);
+  border-radius: 24px;
+  box-shadow: 0 30px 60px oklch(0 0 0 / 0.5), inset 0 2px 2px oklch(1 1 1 / 0.08);
   overflow: hidden;
-  animation: fadeInUp 0.6s ease-out;
+  animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 @keyframes fadeInUp {
   from {
     opacity: 0;
-    transform: translateY(30px);
+    transform: translateY(40px);
   }
   to {
     opacity: 1;
@@ -36,21 +39,20 @@
 
 /* SECTION GAUCHE - FORMULAIRE */
 .formSection {
-  flex: 1.2;
+  flex: 1.25;
   padding: 50px 40px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: white;
-  animation: formSlide 0.8s ease-out 0.2s both;
-  overflow-y: auto;
+  background: oklch(0.18 0.025 265 / 0.35);
+  animation: formSlide 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
 }
 
 @keyframes formSlide {
   from {
     opacity: 0;
-    transform: translateX(-50px);
+    transform: translateX(-30px);
   }
   to {
     opacity: 1;
@@ -64,17 +66,18 @@
 }
 
 .registerTitle {
+  font-family: 'Space Grotesk', sans-serif;
   font-size: 2.2rem;
   font-weight: 700;
-  color: #2d3748;
+  color: oklch(0.98 0.005 250);
   margin: 0 0 8px 0;
   text-align: center;
 }
 
 .subtitle {
-  font-size: 1rem;
-  color: #718096;
-  margin: 0 0 30px 0;
+  font-size: 1.05rem;
+  color: oklch(0.72 0.025 260 / 0.6);
+  margin: 0 0 25px 0;
   text-align: center;
 }
 
@@ -104,59 +107,106 @@
 
 .input {
   width: 100%;
-  padding: 13px 45px 13px 16px;
-  border: 2px solid #e2e8f0;
-  border-radius: 12px;
+  padding: 13px 16px 13px 44px;
+  border: 1px solid oklch(1 0 0 / 12%);
+  border-radius: 14px;
   font-size: 0.95rem;
-  color: #2d3748;
-  background: #f7fafc;
-  transition: all 0.3s ease;
+  color: oklch(0.98 0.005 250);
+  background: oklch(1 0 0 / 4%);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   box-sizing: border-box;
 }
 
 .input:focus {
   outline: none;
-  border-color: #EC8C01;
-  background: white;
-  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+  border-color: oklch(0.75 0.16 75);
+  background: oklch(1 0 0 / 8%);
+  box-shadow: 0 0 0 3px oklch(0.75 0.16 75 / 20%), 0 8px 20px oklch(0 0 0 / 0.2);
 }
 
 .input::placeholder {
-  color: #a0aec0;
+  color: oklch(0.72 0.025 260 / 0.5);
 }
 
 .inputIcon {
   position: absolute;
-  right: 16px;
+  left: 16px;
   top: 50%;
   transform: translateY(-50%);
   font-size: 1.1rem;
-  opacity: 0.5;
+  color: oklch(0.72 0.025 260 / 0.5);
   pointer-events: none;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.inputGroup:focus-within .inputIcon {
+  color: oklch(0.75 0.16 75);
+  transform: translateY(-50%) scale(1.15);
 }
 
 .registerBtn {
   width: 100%;
   padding: 14px;
- background: linear-gradient(135deg, #EC8C01 0%, #EC8C01 100%);
-  color: white;
+  background: linear-gradient(135deg, oklch(0.8 0.15 80) 0%, oklch(0.72 0.17 60) 100%);
+  color: oklch(0.2 0.04 60);
   border: none;
-  border-radius: 12px;
+  border-radius: 14px;
   font-size: 1rem;
-  font-weight: 600;
+  font-weight: 700;
   cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 15px oklch(0.75 0.16 75 / 0.2);
   margin-top: 10px;
 }
 
 .registerBtn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+  box-shadow: 0 8px 25px oklch(0.75 0.16 75 / 0.35);
 }
 
 .registerBtn:active {
   transform: translateY(0);
+}
+
+/* Spinner Loader */
+.spinnerContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.spinner {
+  animation: rotate 2s linear infinite;
+  width: 20px;
+  height: 20px;
+}
+
+.spinner .path {
+  stroke: oklch(0.2 0.04 60);
+  stroke-linecap: round;
+  animation: dash 1.5s ease-in-out infinite;
+}
+
+@keyframes rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes dash {
+  0% {
+    stroke-dasharray: 1, 150;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: -35;
+  }
+  100% {
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: -124;
+  }
 }
 
 /* Divider */
@@ -171,9 +221,9 @@
   content: '';
   position: absolute;
   top: 50%;
-  width: 35%;
+  width: 28%;
   height: 1px;
-  background: #e2e8f0;
+  background: oklch(1 0 0 / 8%);
 }
 
 .divider::before {
@@ -185,10 +235,11 @@
 }
 
 .divider span {
-  font-size: 0.875rem;
-  color: #a0aec0;
-  background: white;
+  font-size: 0.85rem;
+  color: oklch(0.72 0.025 260 / 0.5);
+  background: oklch(0.18 0.025 265 / 0.95);
   padding: 0 10px;
+  border-radius: 5px;
 }
 
 /* Boutons sociaux */
@@ -196,17 +247,17 @@
   display: flex;
   gap: 15px;
   justify-content: center;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
 }
 
 .socialBtn {
   width: 50px;
   height: 50px;
-  border: 2px solid #e2e8f0;
-  border-radius: 12px;
-  background: white;
+  border: 1px solid oklch(1 0 0 / 10%);
+  border-radius: 14px;
+  background: oklch(1 0 0 / 3%);
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -214,48 +265,48 @@
 }
 
 .socialBtn:hover {
-  border-color: #EC8C01;
-  transform: translateY(-3px);
-  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.2);
+  border-color: oklch(0.75 0.16 75 / 0.4);
+  background: oklch(1 0 0 / 6%);
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 6px 15px oklch(0 0 0 / 0.15);
 }
 
 .socialIcon {
-  width: 24px;
-  height: 24px;
+  width: 22px;
+  height: 22px;
 }
 
 /* Lien de connexion */
 .loginLink {
   text-align: center;
-  font-size: 0.9rem;
-  color: #718096;
+  font-size: 0.92rem;
+  color: oklch(0.72 0.025 260 / 0.7);
 }
 
-.loginLink .bouton{
-    border: none;
-    background-color: white;
-    color: #EC8C01;
-    cursor: pointer;
-}
-
-.loginLink a {
-  color: #EC8C01;
+.loginLink .bouton {
+  border: none;
+  background: transparent;
+  color: oklch(0.75 0.16 75);
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 0;
   text-decoration: none;
-  font-weight: 600;
-  transition: color 0.2s ease;
+  transition: color 0.2s ease, text-decoration 0.2s ease;
+  margin-left: 5px;
 }
 
-.loginLink a:hover {
-  color: #EC8C01;
+.loginLink .bouton:hover {
+  color: oklch(0.83 0.16 82);
   text-decoration: underline;
 }
 
-/* SECTION DROITE - IMAGE */
+/* SECTION AD DROITE - IMAGE */
 .imageSection {
-  flex: 1;
+  flex: 0.95;
   position: relative;
   overflow: hidden;
-   background: linear-gradient(135deg, #EC8C01 0%, #EC8C01 100%);
 }
 
 .carImage {
@@ -263,6 +314,11 @@
   height: 100%;
   object-fit: cover;
   object-position: center;
+  transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.registerCard:hover .carImage {
+  transform: scale(1.05);
 }
 
 .overlay {
@@ -271,25 +327,24 @@
   left: 0;
   right: 0;
   bottom: 0;
-   background: linear-gradient(
-  135deg,
-  rgba(236, 140, 1, 0.85) 0%,
-  rgba(255, 255, 255, 0.85) 100%
-);
-
+  background: linear-gradient(
+    135deg,
+    oklch(0.75 0.16 75 / 0.88) 0%,
+    oklch(0.2 0.03 260 / 0.9) 100%
+  );
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 40px;
   color: white;
-  animation: overlaySlide 0.8s ease-out;
+  animation: overlaySlide 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 @keyframes overlaySlide {
   from {
     opacity: 0;
-    transform: translateX(50px);
+    transform: translateX(30px);
   }
   to {
     opacity: 1;
@@ -298,12 +353,14 @@
 }
 
 .welcomeTitle {
-  font-size: 2.5rem;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 2.6rem;
   font-weight: 700;
   margin: 0 0 15px 0;
   text-align: center;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-  animation: titleFade 0.8s ease-out 0.2s both;
+  line-height: 1.2;
+  text-shadow: 0 4px 20px oklch(0 0 0 / 0.3);
+  animation: titleFade 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
 }
 
 @keyframes titleFade {
@@ -318,68 +375,32 @@
 }
 
 .welcomeSubtitle {
-  font-size: 1.05rem;
+  font-size: 1.1rem;
   margin: 0 0 40px 0;
-  opacity: 0.95;
+  opacity: 0.9;
   text-align: center;
   line-height: 1.6;
-  animation: titleFade 0.8s ease-out 0.3s both;
+  font-weight: 400;
+  animation: titleFade 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.3s both;
 }
 
-/* Features */
-.features {
-  display: flex;
-  flex-direction: column;
-  gap: 25px;
-  width: 100%;
-  max-width: 320px;
-  animation: titleFade 0.8s ease-out 0.4s both;
-}
-
-.feature {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  background: rgba(255, 255, 255, 0.15);
-  padding: 15px 20px;
-  border-radius: 15px;
-  backdrop-filter: blur(10px);
-  transition: all 0.3s ease;
-}
-
-.feature:hover {
-  background: rgba(255, 255, 255, 0.25);
-  transform: translateX(10px);
-}
-
-.featureIcon {
-  font-size: 2rem;
-  flex-shrink: 0;
-}
-
-.feature p {
-  margin: 0;
-  font-size: 1rem;
-  font-weight: 500;
-}
-
-/* ============================================
-   RESPONSIVE
-   ============================================ */
+/* RESPONSIVE */
 @media (max-width: 900px) {
   .registerCard {
     flex-direction: column-reverse;
-    max-width: 550px;
+    max-width: 480px;
   }
 
   .formSection {
     flex: none;
     padding: 40px 30px;
+    width: 100%;
   }
 
   .imageSection {
-    min-height: 300px;
+    min-height: 250px;
     flex: none;
+    width: 100%;
   }
 
   .overlay {
@@ -392,23 +413,7 @@
 
   .welcomeSubtitle {
     font-size: 0.95rem;
-    margin-bottom: 30px;
-  }
-
-  .features {
-    gap: 20px;
-  }
-
-  .feature {
-    padding: 12px 18px;
-  }
-
-  .featureIcon {
-    font-size: 1.75rem;
-  }
-
-  .feature p {
-    font-size: 0.9rem;
+    margin-bottom: 20px;
   }
 }
 
@@ -419,20 +424,18 @@
 
   .registerCard {
     border-radius: 20px;
-    max-width: 100%;
   }
 
   .formSection {
-    padding: 35px 25px;
+    padding: 30px 20px;
   }
 
   .registerTitle {
-    font-size: 1.85rem;
+    font-size: 1.8rem;
   }
 
   .subtitle {
-    font-size: 0.9rem;
-    margin-bottom: 25px;
+    font-size: 0.95rem;
   }
 
   .formRow {
@@ -445,64 +448,10 @@
   }
 
   .imageSection {
-    min-height: 250px;
+    min-height: 200px;
   }
 
   .welcomeTitle {
-    font-size: 1.75rem;
-  }
-
-  .welcomeSubtitle {
-    font-size: 0.9rem;
-  }
-
-  .features {
-    gap: 15px;
-  }
-
-  .feature {
-    padding: 12px 15px;
-  }
-
-  .featureIcon {
-    font-size: 1.5rem;
-  }
-
-  .feature p {
-    font-size: 0.85rem;
-  }
-
-  .socialButtons {
-    gap: 12px;
-  }
-
-  .socialBtn {
-    width: 45px;
-    height: 45px;
-  }
-
-  .socialIcon {
-    width: 20px;
-    height: 20px;
-  }
-}
-
-@media (max-width: 400px) {
-  .formSection {
-    padding: 30px 20px;
-  }
-
-  .registerTitle {
     font-size: 1.6rem;
-  }
-
-  .input {
-    padding: 12px 40px 12px 14px;
-    font-size: 0.9rem;
-  }
-
-  .registerBtn {
-    padding: 13px;
-    font-size: 0.95rem;
   }
 }
