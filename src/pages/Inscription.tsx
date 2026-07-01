@@ -4,7 +4,7 @@ import taxiImg from "../assets/images/taxiWelcome.jpg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons/faUser";
 import { faAddressCard, faLock, faPhone } from "@fortawesome/free-solid-svg-icons";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "@tanstack/react-router";
 
 const Inscription: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -121,7 +121,7 @@ const Inscription: React.FC = () => {
                 <span className={styles.inputIcon}><FontAwesomeIcon icon={faLock} /></span>
               </div>
 
-              <button type="submit" className={styles.registerBtn} onClick={() => {navigate("/dashboard")}}>
+              <button type="submit" className={styles.registerBtn} onClick={() => {navigate({ to: "/dashboard" })}}>
                 S'inscrire
               </button>
             </form>
@@ -157,7 +157,7 @@ const Inscription: React.FC = () => {
             </div>
 
             <div className={styles.loginLink}>
-              Vous avez déjà un compte? <button className = {styles.bouton} onClick={()=>{navigate("/login")}}>Se connecter</button>
+              Vous avez déjà un compte? <button className = {styles.bouton} onClick={()=>{navigate({ to: "/" })}}>Se connecter</button>
             </div>
           </div>
         </div>

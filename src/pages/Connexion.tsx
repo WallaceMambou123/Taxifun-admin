@@ -3,16 +3,33 @@ import styles from "../styles/Connexion.module.css";
 import taxiImg from "../assets/images/taxiWelcome.jpg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faLock } from "@fortawesome/free-solid-svg-icons";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "@tanstack/react-router";
+import api from "../lib/api-client";
+
 
 const Connexion: React.FC = () => {
-  const [username, setUsername] = useState("");
+  const [username, setUsername] = useState(""); // Sera utilisé comme email pour l'admin
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Tentative de connexion...", { username, password });
+    setLoading(true);
+    try {
+      const response = await api.post("/auth/admin/login", {
+        email: username,
+        password: password,
+      });
+      localStorage.setItem("admin_token", response.data.accessToken);
+      localStorage.setItem("admin_user", JSON.stringify(response.data.user));
+      navigate({ to: "/dashboard" });
+    } catch (error: any) {
+      console.error("Login failed", error);
+      alert("Identifiants incorrects");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -24,7 +41,7 @@ const Connexion: React.FC = () => {
           <div className={styles.overlay}>
             <h1 className={styles.welcomeTitle}>Bonjour, Bienvenue!</h1>
             <p className={styles.welcomeSubtitle}>Vous n'avez pas de compte?</p>
-            <button className={styles.registerBtn} onClick={()=>{navigate("/signup")}}>S'inscrire</button>
+            <button className={styles.registerBtn} onClick={()=>{navigate({ to: "/signup" })}}>S'inscrire</button>
           </div>
         </div>
 
@@ -63,8 +80,8 @@ const Connexion: React.FC = () => {
                 Mot de passe oublié?
               </a>
 
-              <button type="submit" className={styles.loginBtn} onClick={()=>{navigate("dashboard")}}>
-                Se connecter
+              <button type="submit" className={styles.loginBtn} disabled={loading}>
+                {loading ? "Connexion..." : "Se connecter"}
               </button>
             </form>
 
