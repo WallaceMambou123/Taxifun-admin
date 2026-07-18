@@ -18,6 +18,7 @@ import { Dashboard } from "./pages/admin/Dashboard";
 import { Customers } from "./pages/admin/Customers";
 import { Drivers } from "./pages/admin/Drivers";
 import { DriverDetails } from "./pages/admin/DriverDetails";
+import { DriverValidation } from "./pages/admin/DriverValidation";
 import { Finance } from "./pages/admin/Finance";
 import { Reviews } from "./pages/admin/Reviews";
 import { Trips } from "./pages/admin/Trips";
@@ -125,6 +126,12 @@ const customersRoute = createRoute({
   component: Customers,
 });
 
+const validationsRoute = createRoute({
+  getParentRoute: () => adminLayoutRoute,
+  path: "/validations",
+  component: DriverValidation,
+});
+
 const driversRoute = createRoute({
   getParentRoute: () => adminLayoutRoute,
   path: "/drivers",
@@ -166,6 +173,7 @@ export const routeTree = rootRoute.addChildren([
   signupRoute,
   adminLayoutRoute.addChildren([
     dashboardRoute,
+    validationsRoute,
     customersRoute,
     driversRoute,
     driverDetailsRoute,

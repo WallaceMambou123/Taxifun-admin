@@ -1,10 +1,11 @@
 import { Link, useRouterState } from "@tanstack/react-router";
-import { LayoutDashboard, Users, UserCog, Car, Wallet, Star, Sparkles, X } from "lucide-react";
+import { LayoutDashboard, Users, UserCog, Car, Wallet, Star, Sparkles, X, ShieldCheck } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 type NavItem = { to: string; label: string; icon: typeof LayoutDashboard; exact?: boolean };
 const nav: NavItem[] = [
   { to: "/dashboard", label: "Dashboard", icon: LayoutDashboard, exact: true },
+  { to: "/validations", label: "Validations", icon: ShieldCheck },
   { to: "/drivers", label: "Chauffeurs", icon: UserCog },
   { to: "/customers", label: "Clients", icon: Users },
   { to: "/trips", label: "Trajets", icon: Car },

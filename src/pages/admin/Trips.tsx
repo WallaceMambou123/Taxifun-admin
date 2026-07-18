@@ -6,9 +6,27 @@ import { useTrips } from "../../hooks/useAdminData";
 import { type TripStatus } from "../../lib/mock-data";
 
 const PAGE_SIZE = 10;
-const STATUSES: (TripStatus | "all")[] = ["all", "REQUESTED", "ACCEPTED", "IN_PROGRESS", "COMPLETED", "CANCELLED"];
+const STATUSES: (TripStatus | "all")[] = [
+  "all",
+  "REQUESTED",
+  "NOT_FOUND",
+  "ACCEPTED",
+  "AT_PICKUP",
+  "IN_PROGRESS",
+  "COMPLETED",
+  "CANCELLED_BY_CLIENT",
+  "CANCELLED_BY_DRIVER",
+];
 const LABELS: Record<TripStatus | "all", string> = {
-  all: "Tous", REQUESTED: "Demandés", ACCEPTED: "Acceptés", IN_PROGRESS: "En cours", COMPLETED: "Terminés", CANCELLED: "Annulés",
+  all: "Tous",
+  REQUESTED: "Demandés",
+  NOT_FOUND: "Introuvables",
+  ACCEPTED: "Acceptés",
+  AT_PICKUP: "Au pickup",
+  IN_PROGRESS: "En cours",
+  COMPLETED: "Terminés",
+  CANCELLED_BY_CLIENT: "Annulés client",
+  CANCELLED_BY_DRIVER: "Annulés chauffeur",
 };
 
 export function Trips() {

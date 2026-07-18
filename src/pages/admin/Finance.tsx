@@ -9,7 +9,14 @@ import api from "../../lib/api-client";
 import { useQueryClient } from "@tanstack/react-query";
 
 const PAGE_SIZE = 10;
-const TYPES: (TxType | "all")[] = ["all", "Topup", "Payment", "Commission", "Withdrawal"];
+const TYPES: (TxType | "all")[] = ["all", "TOPUP", "PAYMENT", "COMMISSION", "WITHDRAWAL"];
+const TYPE_LABELS: Record<TxType | "all", string> = {
+  all: "Tous",
+  TOPUP: "Recharges",
+  PAYMENT: "Paiements",
+  COMMISSION: "Commissions",
+  WITHDRAWAL: "Retraits",
+};
 
 export function Finance() {
   const queryClient = useQueryClient();
@@ -20,14 +27,20 @@ export function Finance() {
   const [actionLoading, setActionLoading] = useState<string | null>(null);
 
   const totals = useMemo(() => {
-    const sum = (type: string) => transactions.filter((t: any) => t.type === type).reduce((s: number, t: any) => s + t.amount, 0);
-    return { Topup: sum("TOPUP"), Payment: sum("PAYMENT"), Commission: sum("COMMISSION"), Withdrawal: sum("WITHDRAWAL") };
+    const sum = (type: TxType) =>
+      transactions.filter((t: any) => t.type === type).reduce((s: number, t: any) => s + t.amount, 0);
+    return {
+      TOPUP: sum("TOPUP"),
+      PAYMENT: sum("PAYMENT"),
+      COMMISSION: sum("COMMISSION"),
+      WITHDRAWAL: sum("WITHDRAWAL"),
+    };
   }, [transactions]);
 
   const filtered = useMemo(() => {
     const q = search.toLowerCase();
     return transactions
-      .filter((t: any) => (filter === "all" ? true : t.type === filter.toUpperCase()))
+      .filter((t: any) => (filter === "all" ? true : t.type === filter))
       .filter((t: any) => !q || t.user.toLowerCase().includes(q) || t.id.toLowerCase().includes(q) || t.reference.toLowerCase().includes(q));
   }, [search, filter, transactions]);
 
@@ -52,10 +65,10 @@ export function Finance() {
   const reject = (id: string) => updateStatus(id, "FAILED");
 
   const cards = [
-    { label: "Recharges", value: totals.Topup, color: "from-sky-400 to-cyan-600" },
-    { label: "Paiements", value: totals.Payment, color: "from-emerald-400 to-teal-600" },
-    { label: "Commissions", value: totals.Commission, color: "from-primary to-amber-600" },
-    { label: "Retraits", value: totals.Withdrawal, color: "from-violet-400 to-fuchsia-600" },
+    { label: "Recharges", value: totals.TOPUP, color: "from-sky-400 to-cyan-600" },
+    { label: "Paiements", value: totals.PAYMENT, color: "from-emerald-400 to-teal-600" },
+    { label: "Commissions", value: totals.COMMISSION, color: "from-primary to-amber-600" },
+    { label: "Retraits", value: totals.WITHDRAWAL, color: "from-violet-400 to-fuchsia-600" },
   ];
 
 
@@ -123,14 +136,14 @@ export function Finance() {
 
       <TableShell
         title="Historique des transactions"
-        description="Topup, Payment, Commission, Withdrawal"
+        description="Recharges, paiements, commissions et retraits"
         search={search}
         onSearch={(v) => { setSearch(v); setPage(1); }}
         filters={
           <div className="flex flex-wrap gap-2">
             {TYPES.map((t) => (
               <FilterChip key={t} active={filter === t} onClick={() => { setFilter(t); setPage(1); }}>
-                {t === "all" ? "Tous" : t}
+                {TYPE_LABELS[t]}
               </FilterChip>
             ))}
           </div>

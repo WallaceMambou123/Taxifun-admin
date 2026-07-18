@@ -3,7 +3,7 @@ import { useMemo, useState } from "react";
 import { ArrowUpDown, ChevronRight, Star } from "lucide-react";
 import { DriverStatusBadge } from "../../components/admin/StatusBadge";
 import { FilterChip, Pagination, TableShell } from "../../components/admin/DataTableShell";
-import { useDrivers, useVerifyDriver, useToggleDriverStatus } from "../../hooks/useAdminData";
+import { useDrivers, useToggleDriverStatus } from "../../hooks/useAdminData";
 import { type DriverStatus } from "../../lib/mock-data";
 import { toast } from "sonner";
 
@@ -12,7 +12,6 @@ const PAGE_SIZE = 10;
 
 export function Drivers() {
   const { data: drivers = [], isLoading } = useDrivers();
-  const { mutate: doVerify } = useVerifyDriver();
   const { mutate: doToggleStatus } = useToggleDriverStatus();
 
   const [search, setSearch] = useState("");
@@ -20,13 +19,6 @@ export function Drivers() {
   const [sort, setSort] = useState<SortKey>("trips");
   const [asc, setAsc] = useState(false);
   const [page, setPage] = useState(1);
-
-  const verify = (id: string) => {
-    doVerify(id, {
-      onSuccess: () => toast.success("Chauffeur vérifié avec succès"),
-      onError: () => toast.error("Échec de la vérification"),
-    });
-  };
 
   const toggleStatus = (id: string, currentActive: boolean) => {
     doToggleStatus({ id, isActive: !currentActive }, {
@@ -72,7 +64,7 @@ export function Drivers() {
 
       <TableShell
         title="Liste des chauffeurs"
-        description="Vérifiez les inscriptions et suivez l'activité"
+        description="Gérez la flotte. Les nouvelles inscriptions se valident dans Validations."
         search={search}
         onSearch={(v) => { setSearch(v); setPage(1); }}
         filters={
@@ -81,6 +73,14 @@ export function Drivers() {
             <FilterChip active={filter === "verified"} onClick={() => { setFilter("verified"); setPage(1); }} count={counts.verified}>Vérifiés</FilterChip>
             <FilterChip active={filter === "pending"} onClick={() => { setFilter("pending"); setPage(1); }} count={counts.pending}>En attente</FilterChip>
             <FilterChip active={filter === "blocked"} onClick={() => { setFilter("blocked"); setPage(1); }} count={counts.blocked}>Bloqués</FilterChip>
+            {counts.pending > 0 && (
+              <Link
+                to="/validations"
+                className="inline-flex items-center rounded-full border border-amber-400/30 bg-amber-500/10 px-3 py-1 text-xs font-medium text-amber-200 hover:bg-amber-500/20"
+              >
+                {counts.pending} à valider →
+              </Link>
+            )}
           </div>
         }
       >
@@ -131,14 +131,6 @@ export function Drivers() {
                     >
                       Détails <ChevronRight className="h-3 w-3" />
                     </Link>
-                    {d.status === "pending" && (
-                      <button 
-                         onClick={() => verify(d.id)}
-                         className="rounded-md bg-emerald-500/20 px-2.5 py-1.5 text-xs text-emerald-300 hover:bg-emerald-500/30"
-                      >
-                         Vérifier
-                      </button>
-                    )}
                     <button 
                       onClick={() => toggleStatus(d.id, d.isActive)}
                       className={`rounded-md px-2.5 py-1.5 text-xs ${d.isActive ? "bg-rose-500/20 text-rose-300 hover:bg-rose-500/30" : "bg-blue-500/20 text-blue-300 hover:bg-blue-500/30"}`}

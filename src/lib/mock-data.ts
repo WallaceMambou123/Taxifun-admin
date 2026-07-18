@@ -1,7 +1,15 @@
 export type DriverStatus = "verified" | "pending" | "blocked";
-export type TripStatus = "REQUESTED" | "ACCEPTED" | "IN_PROGRESS" | "COMPLETED" | "CANCELLED";
-export type TxType = "Topup" | "Payment" | "Commission" | "Withdrawal";
-export type TxStatus = "completed" | "pending" | "failed";
+export type TripStatus =
+  | "REQUESTED"
+  | "NOT_FOUND"
+  | "ACCEPTED"
+  | "AT_PICKUP"
+  | "IN_PROGRESS"
+  | "COMPLETED"
+  | "CANCELLED_BY_CLIENT"
+  | "CANCELLED_BY_DRIVER";
+export type TxType = "TOPUP" | "PAYMENT" | "COMMISSION" | "WITHDRAWAL";
+export type TxStatus = "PENDING" | "SUCCESS" | "FAILED" | "CANCELLED" | "REFUNDED";
 
 export interface Driver {
   id: string;
@@ -131,7 +139,17 @@ export const customers: Customer[] = Array.from({ length: 28 }, (_, i) => {
   };
 });
 
-const tripStatuses: TripStatus[] = ["COMPLETED", "COMPLETED", "COMPLETED", "IN_PROGRESS", "ACCEPTED", "REQUESTED", "CANCELLED"];
+const tripStatuses: TripStatus[] = [
+  "COMPLETED",
+  "COMPLETED",
+  "COMPLETED",
+  "IN_PROGRESS",
+  "ACCEPTED",
+  "AT_PICKUP",
+  "REQUESTED",
+  "CANCELLED_BY_CLIENT",
+  "CANCELLED_BY_DRIVER",
+];
 export const trips: Trip[] = Array.from({ length: 60 }, (_, i) => {
   const d = drivers[num(0, drivers.length - 1)];
   const c = customers[num(0, customers.length - 1)];
@@ -151,16 +169,16 @@ export const trips: Trip[] = Array.from({ length: 60 }, (_, i) => {
   };
 });
 
-const txTypes: TxType[] = ["Topup", "Payment", "Commission", "Withdrawal"];
-const txStatuses: TxStatus[] = ["completed", "completed", "completed", "pending", "failed"];
+const txTypes: TxType[] = ["TOPUP", "PAYMENT", "COMMISSION", "WITHDRAWAL"];
+const txStatuses: TxStatus[] = ["SUCCESS", "SUCCESS", "SUCCESS", "PENDING", "FAILED"];
 export const transactions: Transaction[] = Array.from({ length: 80 }, (_, i) => {
   const type = pick(txTypes);
-  const isDriver = type !== "Topup";
+  const isDriver = type !== "TOPUP";
   const u = isDriver ? drivers[num(0, drivers.length - 1)] : customers[num(0, customers.length - 1)];
   return {
     id: `TX-${9000 + i}`,
     type,
-    status: type === "Withdrawal" ? pick(["pending", "completed", "pending"] as TxStatus[]) : pick(txStatuses),
+    status: type === "WITHDRAWAL" ? pick(["PENDING", "SUCCESS", "PENDING"] as TxStatus[]) : pick(txStatuses),
     amount: dec(5, 320, 2),
     user: u.name,
     role: isDriver ? "driver" : "customer",
@@ -219,6 +237,6 @@ export const stats = {
   tripsDelta: 8.1,
   newDrivers: 14,
   newDriversDelta: 22.0,
-  pendingTx: transactions.filter((t) => t.status === "pending").length,
+  pendingTx: transactions.filter((t) => t.status === "PENDING").length,
   pendingTxDelta: -3.2,
 };
